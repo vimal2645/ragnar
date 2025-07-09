@@ -1,0 +1,123 @@
+/* Universal body styling with background image */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url("background.jpeg") no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+  transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+/* Dark theme tweaks (no background change) */
+body.dark-theme {
+  color: #eeeeee;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  max-width: 700px;
+  margin: 80px auto 40px auto;
+  padding: 50px 40px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 204, 255, 0.3);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Larger logo */
+.logo {
+  width: 160px;
+  height: auto;
+  margin-bottom: 25px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+h1 {
+  font-size: 48px;
+  color: #00ccff;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+button {
+  background: linear-gradient(135deg, #00bfff, #009acd);
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #009acd, #007aa3);
+  transform: scale(1.05);
+}
+
+#status, .link-output {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+a {
+  color: #00ffcc;
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 16px;
+  color: #ffffffcc;
+  padding-bottom: 20px;
+}
+
+footer .author {
+  color: #00e6e6;
+  font-weight: bold;
+}
+
+/* Theme toggle styling */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+/* Fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

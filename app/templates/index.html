@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ragnar - AI Voice Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="overlay">
+    <img src="{{ url_for('static', filename='ragnar_logo.png') }}" class="logo" alt="Ragnar Logo">
+    <p class="subtitle">Talk to your AI voice assistant!</p>
+    <button id="talkBtn">🎤 Talk to Ragnar</button>
+    <p id="status"></p>
+    <p id="link" class="link-output"></p>
+  </div>
+
+  <footer>
+    Made by <span class="author">Vimal Prakash</span>
+  </footer>
+
+  <script>
+    const btn = document.getElementById("talkBtn");
+    const statusEl = document.getElementById("status");
+    const linkEl = document.getElementById("link");
+
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-US";
+
+    btn.onclick = () => {
+      statusEl.textContent = "🎙️ Listening...";
+      recognition.start();
+    };
+
+    recognition.onresult = (event) => {
+      const text = event.results[0][0].transcript;
+      statusEl.textContent = "🔄 Processing...";
+
+      fetch("/assistant", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      })
+      .then(r => r.json())
+      .then(data => {
+        statusEl.textContent = data.message || "";
+        linkEl.innerHTML = "";
+        if (data.url) {
+          linkEl.innerHTML = `<a href="${data.url}" target="_blank">${data.url}</a>`;
+          window.open(data.url, '_blank');
+        }
+        const utterance = new SpeechSynthesisUtterance(data.message);
+        speechSynthesis.speak(utterance);
+      })
+      .catch(err => {
+        console.error(err);
+        statusEl.textContent = "❌ Could not recognize speech.";
+      });
+    };
+
+    recognition.onerror = () => {
+      statusEl.textContent = "❌ Could not recognize speech.";
+    };
+  </script>
+</body>
+</html>
