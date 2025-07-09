@@ -62,4 +62,6 @@ def assistant():
     return jsonify(result)
 
 if __name__ == "__main__":
+    # This block ensures it runs when you execute:
+    # python ragnar.py
     app.run(host="0.0.0.0", port=5000, debug=True)
